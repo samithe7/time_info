@@ -15,7 +15,7 @@ and the Flutter guide for
 
  [pub url] (https://pub.dev/packages/time_info)
 
-A Flutter plugin for launching a URL.
+
 
 |             | Android | iOS   | Linux | macOS  | Web | Windows     |
 |-------------|---------|-------|-------|--------|-----|-------------|
