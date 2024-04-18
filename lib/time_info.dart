@@ -3,7 +3,7 @@ library time_info;
 import 'dart:async' show Timer;
 import 'dart:developer' show log;
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show BuildContext, State, StatefulWidget, Text, TextStyle, Widget;
 import 'package:intl/intl.dart';
 
 /// A Calculator.
@@ -21,6 +21,40 @@ class TimeInfo extends StatefulWidget {
   final TextStyle? style;
 
   final String? languageCode;
+
+
+
+    static ({String? time, bool previusYear}) getTimeAgo(
+      {required DateTime givenTime}) {
+    final now = DateTime.now();
+
+    log('${givenTime.year} == ${now.year}');
+    if (givenTime.year == now.year) {
+      late String? timeAgo;
+
+      final difference = now.difference(givenTime).inMinutes;
+
+      if (givenTime.day == now.day) {
+        if (difference < 1) {
+          timeAgo = 'now';
+        } else if (difference < 60) {
+          timeAgo = '${difference}m';
+        } else if (difference < 1440) {
+          final hours = (difference / 60).floor();
+          timeAgo = '${hours}h';
+        }
+      } else {
+        timeAgo = null;
+
+        // final months = (difference / 43200).floor();
+        // timeAgo = '$months months ago';
+      }
+
+      return (time: timeAgo, previusYear: false);
+    } else {
+      return (previusYear: true, time: '');
+    }
+  }
 
 
   @override
@@ -41,7 +75,7 @@ class _TimeInfoState extends State<TimeInfo> {
   void initState() {
     super.initState();
 
-    info = _Time.getTimeAgo(givenTime: widget.time);
+    info =  TimeInfo .getTimeAgo(givenTime: widget.time);
 
     if (info.previusYear == false &&
         info.time != null &&
@@ -86,36 +120,4 @@ class _TimeInfoState extends State<TimeInfo> {
 
 
 
-abstract class _Time {
-  static ({String? time, bool previusYear}) getTimeAgo(
-      {required DateTime givenTime}) {
-    final now = DateTime.now();
 
-    log('${givenTime.year} == ${now.year}');
-    if (givenTime.year == now.year) {
-      late String? timeAgo;
-
-      final difference = now.difference(givenTime).inMinutes;
-
-      if (givenTime.day == now.day) {
-        if (difference < 1) {
-          timeAgo = 'now';
-        } else if (difference < 60) {
-          timeAgo = '${difference}m';
-        } else if (difference < 1440) {
-          final hours = (difference / 60).floor();
-          timeAgo = '${hours}h';
-        }
-      } else {
-        timeAgo = null;
-
-        // final months = (difference / 43200).floor();
-        // timeAgo = '$months months ago';
-      }
-
-      return (time: timeAgo, previusYear: false);
-    } else {
-      return (previusYear: true, time: '');
-    }
-  }
-}
