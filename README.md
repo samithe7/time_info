@@ -11,7 +11,15 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
+# Time_Info
 
+ [pub url] (https://pub.dev/packages/time_info)
+
+A Flutter plugin for launching a URL.
+
+|             | Android | iOS   | Linux | macOS  | Web | Windows     |
+|-------------|---------|-------|-------|--------|-----|-------------|
+| **Support** | SDK 16+ | 12.0+ | Any   | 10.14+ | Any | Windows 10+ |
 
 ## Features
 
@@ -20,7 +28,7 @@ and the Flutter guide for
 
 ## Getting started
 
-Simple  and  eazy
+Simple  and  easy to use
 
 ## Usage
 
